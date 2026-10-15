@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}My Tasks | Task Manager{% endblock %}
+{% block content %}
+<header class="page-header">
+  <div>
+    <h1>My Tasks</h1>
+    <p class="subtitle">Add a task without refreshing the page.</p>
+  </div>
+  <form action="{{ url_for('logout') }}" method="post">
+    <button class="button-secondary" type="submit">Log out</button>
+  </form>
+</header>
+
+<form id="task-form">
+  <label for="title">Task title</label>
+  <input id="title" name="title" maxlength="200" placeholder="What needs to be done?" required>
+  <label for="description">Description <span class="optional">(optional)</span></label>
+  <textarea id="description" name="description" rows="3" placeholder="Add a few details"></textarea>
+  <button type="submit">Add task</button>
+  <p id="form-message" class="error" role="alert" hidden></p>
+</form>
+
+<h2>Task list</h2>
+<p id="empty-state" class="empty-state" {% if tasks %}hidden{% endif %}>No tasks yet. Add your first one above.</p>
+<ul id="task-list" class="task-list">
+  {% for task in tasks %}
+    <li class="task-item">
+      <strong>{{ task["title"] }}</strong>
+      {% if task["description"] %}<p>{{ task["description"] }}</p>{% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='tasks.js') }}" defer></script>
+{% endblock %}

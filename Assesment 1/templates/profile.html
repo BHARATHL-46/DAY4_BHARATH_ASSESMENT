@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Your account{% endblock %}
+{% block content %}
+<h1>Logged in successfully</h1>
+<dl>
+  <dt>Name</dt><dd>{{ user["name"] }}</dd>
+  <dt>Email</dt><dd>{{ user["email"] }}</dd>
+</dl>
+{% endblock %}
